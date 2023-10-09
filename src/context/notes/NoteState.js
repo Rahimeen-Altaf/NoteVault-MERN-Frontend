@@ -106,6 +106,17 @@ const NoteState = (props) => {
 
       // Edit a note
       const editNote = (id, title, description, tag) => {
+        // API Call
+
+        // Logic to edit in clientg
+        for (let index = 0; index < notes.length; index++) {
+          const note = notes[index];
+          if (note._id === id) {
+            note.title = title;
+            note.description = description;
+            note.tag = tag;
+          }
+        }
       }
 
     return (
