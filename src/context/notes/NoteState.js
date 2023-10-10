@@ -83,15 +83,20 @@ const NoteState = (props) => {
     const json = response.json();
     console.log(json)
 
+
+    let newNotes = JSON.parse(JSON.stringify(notes))
+    
     // Logic to edit in clientg
-    for (let index = 0; index < notes.length; index++) {
-      const note = notes[index];
+    for (let index = 0; index < newNotes.length; index++) {
+      const note = newNotes[index];
       if (note._id === id) {
-        note.title = title;
-        note.description = description;
-        note.tag = tag;
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
       }
     }
+    setNotes(newNotes);
   }
 
   return (
