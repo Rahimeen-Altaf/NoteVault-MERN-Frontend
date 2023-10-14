@@ -4,9 +4,8 @@ import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
   const host = "http://localhost:5000";
-  const notesInitial = []
 
-  const [notes, setNotes] = useState(notesInitial)
+  const [notes, setNotes] = useState([])
 
   // Add all note
   const getNotes = async () => {
@@ -15,7 +14,7 @@ const NoteState = (props) => {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwZjEwNjA1YmY2MDQzN2RjNTEzZjhmIn0sImlhdCI6MTY5NTk3Nzg0NX0.xbyVbNxnfOngjRCjtww2AugXUAR9pJhQjN5xRcrcLl0"
+        "auth-token": localStorage.getItem('token')
       },
     });
     const json = await response.json();
@@ -30,7 +29,7 @@ const NoteState = (props) => {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwZjEwNjA1YmY2MDQzN2RjNTEzZjhmIn0sImlhdCI6MTY5NTk3Nzg0NX0.xbyVbNxnfOngjRCjtww2AugXUAR9pJhQjN5xRcrcLl0"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -45,7 +44,7 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwZjEwNjA1YmY2MDQzN2RjNTEzZjhmIn0sImlhdCI6MTY5NTk3Nzg0NX0.xbyVbNxnfOngjRCjtww2AugXUAR9pJhQjN5xRcrcLl0"
+        "auth-token": localStorage.getItem('token')
       },
     });
     const json = await response.json();
@@ -63,7 +62,7 @@ const NoteState = (props) => {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwZjEwNjA1YmY2MDQzN2RjNTEzZjhmIn0sImlhdCI6MTY5NTk3Nzg0NX0.xbyVbNxnfOngjRCjtww2AugXUAR9pJhQjN5xRcrcLl0"
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });

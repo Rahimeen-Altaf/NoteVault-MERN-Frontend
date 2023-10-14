@@ -2,11 +2,22 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import NoteContext from '../context/notes/noteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
+import { useNavigate } from 'react-router-dom';
+
 export default function Notes(props) {
+
+  let navigate = useNavigate();
+
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
+
   useEffect(() => {
+    if(localStorage.getItem('token')){
     getNotes();
+    } else {
+      props.showAlert("You are not logged in. Please login to continue", "danger");
+      navigate('/login');
+    }
     // eslint-disable-next-line
   }, [])
 
@@ -73,12 +84,16 @@ export default function Notes(props) {
 
       <div className="row my-3">
         <h2>Your Notes</h2>
-        <div className="container mx-2">
-          {notes.length === 0 && 'No notes to display'}
-        </div>
-        {notes.map((note) => {
-          return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />;
-        })}
+        {
+          !notes.length ? <div className='container mx-2'> No Notes to display </div> :
+            <>
+              {
+                notes.map((note) => (
+                  <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />
+                ))
+              }
+            </>
+        }
       </div>
     </>
   )
