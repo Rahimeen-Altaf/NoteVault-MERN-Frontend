@@ -1,39 +1,40 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default function Signup() {
+export default function Signup(props) {
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" })
   let navigate = useNavigate();
-  
+
   const onChange = (e) => {
-      setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    }
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  }
 
   const handlesubmit = async (e) => {
-      e.preventDefault();
-      const {name, email, password} = credentials;
-      const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ name, email, password})
-      });
-      const json = await response.json();
-      console.log(json);
-      if (json.success) {
-          // Save the auth token and redirect
-          localStorage.setItem('token', json.authtoken);
-          navigate("/");
-      } else {
-          alert("Invalid Credentials");
-      }
+    e.preventDefault();
+    const { name, email, password } = credentials;
+    const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, email, password })
+    });
+    const json = await response.json();
+    console.log(json);
+    if (json.success) {
+      // Save the auth token and redirect
+      localStorage.setItem('token', json.authtoken);
+      navigate("/");
+      props.showAlert("Account Created Successfully.", "success");
+    } else {
+      props.showAlert("Invalid Credentials.", "danger");
+    }
   }
 
   return (
     <div className='container'>
       <form onSubmit={handlesubmit}>
-      <div className="mb-3">
+        <div className="mb-3">
           <label htmlFor="name" className="form-label">Name</label>
           <input type="text" className="form-control" name="name" id="name" onChange={onChange} aria-describedby="emailHelp" />
         </div>

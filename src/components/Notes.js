@@ -2,19 +2,19 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import NoteContext from '../context/notes/noteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
-export default function Notes() {
+export default function Notes(props) {
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
   useEffect(() => {
     getNotes();
     // eslint-disable-next-line
   }, [])
-  
+
   const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" })
 
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({ id: currentNote._id ,etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag });
+    setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag });
   }
 
   const ref = useRef(null);
@@ -23,8 +23,9 @@ export default function Notes() {
 
   const handleClick = (e) => {
     console.log("Updating a note", note)
-    editNote (note.id, note.etitle, note.edescription, note.etag);
+    editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Note updated successfully", "success");
   }
 
   const onChange = (e) => {
@@ -33,7 +34,7 @@ export default function Notes() {
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={props.showAlert} />
 
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
       </button>
@@ -56,13 +57,13 @@ export default function Notes() {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="tag" className="form-label">Tag</label>
-                  <input type="text" className="form-control" id="etag" name="etag"  value={note.etag} onChange={onChange} />
+                  <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} />
                 </div>
               </form>
             </div>
             <div className="modal-footer">
               <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" disabled={note.etitle.length<5 || note.edescription.length<5} onClick={handleClick} className="btn btn-primary">Update changes</button>
+              <button type="button" disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleClick} className="btn btn-primary">Update changes</button>
             </div>
           </div>
         </div>
@@ -73,10 +74,10 @@ export default function Notes() {
       <div className="row my-3">
         <h2>Your Notes</h2>
         <div className="container mx-2">
-        {notes.length === 0 && 'No notes to display'}
+          {notes.length === 0 && 'No notes to display'}
         </div>
         {notes.map((note) => {
-          return <NoteItem key={note._id} note={note} updateNote={updateNote} />;
+          return <NoteItem key={note._id} note={note} updateNote={updateNote} showAlert={props.showAlert} />;
         })}
       </div>
     </>
