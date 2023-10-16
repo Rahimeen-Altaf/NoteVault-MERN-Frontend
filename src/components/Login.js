@@ -28,7 +28,7 @@ export default function Login(props) {
       props.showAlert('Logged in Successfully', 'success');
       navigate('/');
     } else {
-      props.showAlert('Invalid Details', 'danger');
+      props.showAlert(json.error, 'danger');
     }
   }
 

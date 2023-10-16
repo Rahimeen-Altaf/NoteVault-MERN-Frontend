@@ -42,7 +42,7 @@ export default function Signup(props) {
       navigate('/');
       props.showAlert('Account Created Successfully.', 'success');
     } else {
-      props.showAlert('Invalid Credentials.', 'danger');
+      props.showAlert(json.error, 'danger');
     }
   };
 
