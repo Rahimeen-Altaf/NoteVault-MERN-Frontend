@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  color: 'linear-gradient(to bottom, pink, purple, pink)' ;
+  background: 'linear-gradient(to bottom, pink, purple, pink)' 
 }
 
 .App-logo {
