@@ -34,8 +34,8 @@ export default function Navbar() {
           </ul>
           {!localStorage.getItem('token') ? (
             <form className="d-flex me-auto" role="search">
-              <Link className="btn btn-light-pink mx-1" to="/login" role="button">Login</Link>
-              <Link className="btn btn-light-pink mx-1" to="/signup" role="button">Signup</Link>
+              <Link className={`btn btn-light-pink mx-1 ${location.pathname === '/login' ? 'active' : ''}`} to="/login" role="button">Login</Link>
+              <Link className={`btn btn-light-pink mx-1 ${location.pathname === '/signup' ? 'active' : ''}`} to="/signup" role="button">Signup</Link>
             </form>
           ) : (
             <button onClick={handleLogout} className="btn btn-light-pink me-auto">Logout</button>
@@ -47,6 +47,7 @@ export default function Navbar() {
 }
 
 const logoStyle = {
+  bold: "true",
   fontFamily: "'Pacifico', cursive", // Aesthetic font
   textShadow: "2px 2px 4px #FF00FF", // Shine effect
 };
