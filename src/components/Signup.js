@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const host = "https://note-vault-app-278b6566bdac.herokuapp.com";
 
 export default function Signup(props) {
   document.title = 'NoteVault - Signup';
@@ -25,7 +26,7 @@ export default function Signup(props) {
       return;
     }
 
-    const response = await fetch('http://localhost:5000/api/auth/createuser', {
+    const response = await fetch(`${host}/api/auth/createuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

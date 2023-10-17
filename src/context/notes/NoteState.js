@@ -3,7 +3,8 @@ import NoteContext from "./noteContext";
 
 
 const NoteState = (props) => {
-  const host = "http://localhost:5000";
+  //const host = "http://localhost:5000";
+  const host = "note-vault-app-278b6566bdac.herokuapp.com";
 
   const [notes, setNotes] = useState([])
 

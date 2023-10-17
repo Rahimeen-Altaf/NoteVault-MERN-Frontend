@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+const host = "https://note-vault-app-278b6566bdac.herokuapp.com";
 
 export default function Login(props) {
   document.title = 'NoteVault - Login';
-
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  
   let navigate = useNavigate();
-
+  
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   }
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:5000/api/auth/login`, {
+    const response = await fetch(`${host}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
