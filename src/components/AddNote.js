@@ -20,7 +20,7 @@ export default function AddNote(props) {
 
   return (
     <div className="container my-3">
-      <h2>Add a Note</h2>
+      <h2 style={{ fontFamily: "Tangerine', cursive" }}>Add a Note</h2>
       <form className='my-3'>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title</label>
@@ -34,7 +34,7 @@ export default function AddNote(props) {
           <label htmlFor="tag" className="form-label">Tag</label>
           <input type="text" className="form-control" value={note.tag} minLength={2} required id="tag" name="tag" onChange={onChange} />
         </div>
-        <button disabled={note.title.length < 5 || note.description.length < 5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Note</button>
+        <button disabled={note.title.length < 5 || note.description.length < 5} type="submit" className="btn btn-dark-pink" onClick={handleClick}>Add Note</button>
       </form>
     </div>
   )

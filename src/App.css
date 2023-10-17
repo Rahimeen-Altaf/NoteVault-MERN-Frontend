@@ -1,7 +1,8 @@
 .App {
+  margin-top: 0;
+  padding-top: 0;
   text-align: center;
-  color: 'linear-gradient(to bottom, pink, purple, pink)' ;
-  background: 'linear-gradient(to bottom, pink, purple, pink)' 
+  background: linear-gradient(to bottom, pink, purple, pink)
 }
 
 .App-logo {
@@ -34,6 +35,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

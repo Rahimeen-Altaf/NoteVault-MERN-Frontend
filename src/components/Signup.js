@@ -52,8 +52,8 @@ export default function Signup(props) {
   };
 
   return (
-    <div className='mt-2' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-      <div className='text-white p-4 rounded' style={{ background: 'rgba(0, 0, 0, 0.6)' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh', marginTop: "0", marginBottom: "0" }}>
+      <div className='text-white p-4 rounded' style={{ background: 'rgba(0, 0, 0, 0.6)', marginTop: "0", marginBottom: "0" }}>
         <h2 className='my-3'>Create an account to use <code>NoteVault</code></h2>
         <form onSubmit={handleSubmit}>
           <div className="my-3">
@@ -63,7 +63,6 @@ export default function Signup(props) {
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input type="email" className="form-control" name="email" id="email" onChange={onChange} />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">Password</label>
@@ -73,9 +72,9 @@ export default function Signup(props) {
             <label htmlFor="cpassword" className="form-label">Confirm Password</label>
             <input type="password" className="form-control" name="cpassword" id="cpassword" onChange={onChange} minLength={5} required />
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-dark-pink">Submit</button>
         </form>
-        <p className="mt-3">Already have an account? <span onClick={goToLogin} style={{ color: 'blue', cursor: 'pointer' }}>Click here to Login!</span></p>
+        <p className="mt-3">Already have an account? <span onClick={goToLogin} style={{ color: 'pink', cursor: 'pointer' }}>Click here to Login!</span></p>
       </div>
     </div>
   );

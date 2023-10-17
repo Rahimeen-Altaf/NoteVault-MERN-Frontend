@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from '../favicon-32x32.png';
 
 export default function Navbar() {
   let navigate = useNavigate();
@@ -15,8 +16,9 @@ export default function Navbar() {
   }, [location]);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
+        <img src={logo} alt="logo" width="32" height="32" />
         <Link className="navbar-brand" to="/" style={logoStyle}>NoteVault</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

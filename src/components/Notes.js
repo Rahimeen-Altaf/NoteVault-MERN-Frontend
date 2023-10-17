@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteContext from '../context/notes/noteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
 import { useNavigate } from 'react-router-dom';
 
 export default function Notes(props) {
-
   let navigate = useNavigate();
-
   const context = useContext(NoteContext);
   const { notes, getNotes, editNote } = context;
 
   useEffect(() => {
-    if(localStorage.getItem('token')){
-    getNotes();
+    if (localStorage.getItem('token')) {
+      getNotes();
     } else {
       props.showAlert("You are not logged in. Please login to continue", "danger");
       navigate('/login');
     }
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" })
+  const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" });
 
   const updateNote = (currentNote) => {
     ref.current.click();
@@ -31,9 +29,8 @@ export default function Notes(props) {
   const ref = useRef(null);
   const refClose = useRef(null);
 
-
   const handleClick = (e) => {
-    console.log("Updating a note", note)
+    console.log("Updating a note", note);
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
     props.showAlert("Note updated successfully", "success");
@@ -52,12 +49,12 @@ export default function Notes(props) {
       <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Edit Note</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal-header" style={{ display: "flex", justifyContent: "space-between" }}>
+              <h5 className="modal-title" id="exampleModalLabel" style={{ fontFamily: "'Pacifico', cursive", order: "1", flexGrow: "1" }}>Edit Note</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" style={{ order: "2" }}></button>
             </div>
             <div className="modal-body">
-              <form className='my-3'>
+              <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">Title</label>
                   <input type="text" className="form-control" minLength={5} required id="etitle" name="etitle" value={note.etitle} aria-describedby="emailHelp" onChange={onChange} />
@@ -73,19 +70,17 @@ export default function Notes(props) {
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleClick} className="btn btn-primary">Update changes</button>
+              <button type="button" ref={refClose} className="btn btn-dark-pink" data-bs-dismiss="modal">Close</button>
+              <button type="button" disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleClick} className="btn btn-dark-pink">Update changes</button>
             </div>
           </div>
         </div>
       </div>
 
-
-
       <div className="row my-3">
         <h2>Your Notes</h2>
         {
-          !notes.length ? <div className='container mx-2'> No Notes to display </div> :
+          !notes.length ? <div className="container mx-2" style={{ fontFamily: "'Pacifico', cursive" }}> No Notes to display </div> :
             <>
               {
                 notes.map((note) => (
@@ -96,5 +91,5 @@ export default function Notes(props) {
         }
       </div>
     </>
-  )
+  );
 }
