@@ -40,8 +40,8 @@ export default function Signup(props) {
     if (json.success) {
       // Save the auth token and redirect
       localStorage.setItem('token', json.authtoken);
-      navigate('/');
-      props.showAlert('Account Created Successfully.', 'success');
+      navigate('/login');
+      props.showAlert('Account Created Successfully, Login to Use NoteVault!', 'success');
     } else {
       props.showAlert(json.error, 'danger');
     }
