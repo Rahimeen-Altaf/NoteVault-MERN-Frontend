@@ -8,7 +8,7 @@ export default function About(props) {
     display: 'flex',
     justifyContent: 'top',
     alignItems: 'top',
-    fontFamily: "'Pacifico', cursive"
+    fontFamily: "'Inria Sans', Lightitalic"
   };
 
   return (
