@@ -18,6 +18,18 @@ export default function NoteItem(props) {
                             props.showAlert("Note deleted successfully", "success");
                         }}></i>
                         <i className="fa-regular fa-pen-to-square mx-2" onClick={() => updateNote(note)}></i>
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            position: 'absolute',
+                            right: '0',
+                            color: 'pink',
+                            background: 'pink'
+                        }}>
+                            <span className="badge bg-light-pink">
+                                {note.tag ? note.tag : 'default'}
+                            </span>
+                        </div>
                     </div>
                     <p className="card-text">
                         {note.description}
