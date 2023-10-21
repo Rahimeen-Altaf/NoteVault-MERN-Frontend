@@ -20,6 +20,8 @@ export default function Notes(props) {
   }, []);
 
   const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" });
+  const [showTitleError, setShowTitleError] = useState(false);
+  const [showDescriptionError, setShowDescriptionError] = useState(false);
 
   const updateNote = (currentNote) => {
     ref.current.click();
@@ -30,14 +32,37 @@ export default function Notes(props) {
   const refClose = useRef(null);
 
   const handleClick = (e) => {
-    console.log("Updating a note", note);
-    editNote(note.id, note.etitle, note.edescription, note.etag);
-    refClose.current.click();
-    props.showAlert("Note updated successfully", "success");
+    if (note.etitle.length < 5) {
+      setShowTitleError(true);
+    } else {
+      setShowTitleError(false);
+    }
+
+    if (note.edescription.length < 5) {
+      setShowDescriptionError(true);
+    } else {
+      setShowDescriptionError(false);
+    }
+
+    if (note.etitle.length >= 5 && note.edescription.length >= 5) {
+      console.log("Updating a note", note);
+      editNote(note.id, note.etitle, note.edescription, note.etag);
+      refClose.current.click();
+      props.showAlert("Note updated successfully", "success");
+    }
   }
 
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
+
+    // Hide the error message when the user starts typing again
+    if (e.target.name === "etitle" && e.target.value.length >= 5) {
+      setShowTitleError(false);
+    }
+
+    if (e.target.name === "edescription" && e.target.value.length >= 5) {
+      setShowDescriptionError(false);
+    }
   }
 
   return (
@@ -57,11 +82,13 @@ export default function Notes(props) {
               <form className="my-3">
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">Title</label>
-                  <input type="text" className="form-control" minLength={5} required id="etitle" name="etitle" value={note.etitle} aria-describedby="emailHelp" onChange={onChange} />
+                  <input type="text" className={`form-control ${showTitleError ? 'is-invalid' : ''}`} minLength={5} required id="etitle" name="etitle" value={note.etitle} aria-describedby="emailHelp" onChange={onChange} />
+                  {showTitleError && <div className="invalid-feedback">5 characters needed</div>}
                 </div>
                 <div className="mb-3">
                   <label htmlFor="description" className="form-label">Description</label>
-                  <input type="text" className="form-control" minLength={5} required id="edescription" name="edescription" value={note.edescription} onChange={onChange} />
+                  <input type="text" className={`form-control ${showDescriptionError ? 'is-invalid' : ''}`} minLength={5} required id="edescription" name="edescription" value={note.edescription} onChange={onChange} />
+                  {showDescriptionError && <div className="invalid-feedback">5 characters needed</div>}
                 </div>
                 <div className="mb-3">
                   <label htmlFor="tag" className="form-label">Tag</label>
@@ -71,7 +98,7 @@ export default function Notes(props) {
             </div>
             <div className="modal-footer">
               <button type="button" ref={refClose} className="btn btn-dark-pink" data-bs-dismiss="modal">Close</button>
-              <button type="button" disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleClick} className="btn btn-dark-pink">Update changes</button>
+              <button type="button" onClick={handleClick} className="btn btn-dark-pink">Update</button>
             </div>
           </div>
         </div>
