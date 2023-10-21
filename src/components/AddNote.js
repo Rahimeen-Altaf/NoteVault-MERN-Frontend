@@ -51,12 +51,12 @@ export default function AddNote(props) {
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title</label>
           <input type="text" className={`form-control ${showTitleError ? 'is-invalid' : ''}`} value={note.title} minLength={5} required id="title" name="title" aria-describedby="emailHelp" onChange={onChange} />
-          {showTitleError && <div className="invalid-feedback">5 characters needed</div>}
+          {showTitleError && <div className="invalid-feedback">Title must be 5 characters or longer.</div>}
         </div>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">Description</label>
           <input type="text" className={`form-control ${showDescriptionError ? 'is-invalid' : ''}`} value={note.description} minLength={5} required id="description" name="description" onChange={onChange} />
-          {showDescriptionError && <div className="invalid-feedback">5 characters needed</div>}
+          {showDescriptionError && <div className="invalid-feedback">Description must be 5 characters or longer.</div>}
         </div>
         <div className="mb-3">
           <label htmlFor="tag" className="form-label">Tag</label>
